@@ -47,4 +47,16 @@ final class SnapshotTestingCGCIExtensionsTests: XCTestCase {
         assertSnapshot(of: filteredImage, as: .image, named: "macos")
 #endif
     }
+
+    // MARK: - CGImage
+    func testCGImageSnapshot() {
+        let textImage = TestAttributedString.generate()
+        XCTAssertNotNil(textImage)
+
+#if canImport(UIKit)
+        assertSnapshot(of: textImage!, as: .image, named: "ios")
+#elseif canImport(Cocoa)
+        assertSnapshot(of: textImage!, as: .image, named: "macos")
+#endif
+    }
 }
